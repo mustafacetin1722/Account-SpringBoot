@@ -26,6 +26,9 @@ public class CustomerService {
         return this.customerRepository.findById(id).
                 orElseThrow(() -> new CustomerNotFoundException("Customer could not find by id: " + id));
     }
+    public CustomerDto getCustomerById(String customerId) {
+        return customerDtoConverter.convertToCustomerDto(findCustomerById(customerId));
+    }
     public List<CustomerDto> getAllCustomer(){
         return customerRepository.findAll()
                 .stream().map(customer -> customerDtoConverter.convertToCustomerDto(customer))
